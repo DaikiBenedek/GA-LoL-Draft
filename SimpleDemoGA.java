@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /**
  * @author Tokuhara Daiki
  */
@@ -5,15 +7,62 @@
 //Main class
 public class SimpleDemoGA {
 
-  //  Population population = new Population();
-   // Individual fittest;
-   // Individual secondFittest;
-   // int generationCount = 0;
-
     public static void main(String[] args) {
-        Individuo individuo = new Individuo();
-        System.out.println(individuo);
+        Random rn = new Random();
+        //Generar composición inicial
+        Individuo oponente = new Individuo();
+        System.out.println("Oponente " + oponente);
+        //Initialize population
+        Generacion generacion = new Generacion();
+        Individuo mejor;
+        Individuo promedio;
+        Individuo peor;
+        int contadorGeneracion = 0;
+        
+        generacion.initializePopulation(100);
+        mejor = generacion.getFittest(oponente);
+        peor = generacion.getLeastFittest(oponente);
+        System.out.println("Mejor " + mejor);
+        System.out.println("Peor " + peor);
+
+        // Simulación de generaciones
+        for (int generacionActual = 0; generacionActual < 10; generacionActual++) {
+            // Seleccionar padres
+            Individuo[] padres = new Individuo[10]; // Selecciona 10 padres aleatoriamente
+            for (int i = 0; i < padres.length; i++) {
+                padres[i] = generacion.individuos[new Random().nextInt(generacion.popSize)];
+            }
+
+            // Crear hijos mediante cruza
+            Individuo[] hijos = new Individuo[10];
+            for (int i = 0; i < hijos.length; i++) {
+                Individuo padre1 = padres[new Random().nextInt(padres.length)];
+                Individuo padre2 = padres[new Random().nextInt(padres.length)];
+                hijos[i] = generacion.cruzar(padre1, padre2);
+            }
+
+            // Aplicar mutación a los hijos
+            for (Individuo hijo : hijos) {
+                generacion.mutacion(hijo);
+            }
+
+            // Reemplazar población usando (μ + λ)
+            generacion.reemplazoSeleccion(hijos);
+
+            // Imprimir mejor fitness de la generación
+            System.out.println("Generación " + generacionActual + " - Mejor fitness: " + generacion.individuos[0].fitnessTotal);
+        }
     }
+
+    //Selection
+    //void selection() {
+
+        //Select the most fittest individual
+        //fittest = population.getFittest();
+
+        //Select the second most fittest individual
+        //secondFittest = population.getSecondFittest();
+    //}
 }
 
         /**

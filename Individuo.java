@@ -7,12 +7,14 @@ import java.util.Random;
  */
 
 // Clase Individuo
-public class Individuo {
+public class Individuo implements Cloneable{
     Campeon[] campeones = new Campeon[5];
-    Map<Integer, Campeon> championPool; 
+    Map<Integer, Campeon> championPool;
+
     float fitnessEngage = 0;
     float fitnessPoke = 0;
     float fitnessTeamFight = 0;
+    float fitnessTotal = 0;
 
     // Constructor de Individuo
     public Individuo() {
@@ -25,6 +27,7 @@ public class Individuo {
         campeones[2] = championPool.get(rn.nextInt(55 - 41 + 1) + 41);  // Rango 41-55
         campeones[3] = championPool.get(rn.nextInt(75 - 56 + 1) + 56);  // Rango 56-75
         campeones[4] = championPool.get(rn.nextInt(90 - 76 + 1) + 76);  // Rango 76-90
+        calcFitness();
     }
 
     public Map<Integer, Campeon> crearChampionPool(){
@@ -123,13 +126,11 @@ public class Individuo {
     }
 
     public void calcFitness() {
-
-        // fitness = 0;
-         // for (int i = 0; i < 5; i++) {
-         //    if (genes[i] == 1) {
-          //       ++fitness;
-           //  }
-        // }
+        for (Campeon campeon : campeones){
+            fitnessEngage += ((campeon.AD + campeon.AP) * 40)/800 + ((campeon.MS)*20)/400 + ((campeon.CC)*40)/25;
+            fitnessPoke += ((campeon.AD + campeon.AP) * 40)/800 + ((campeon.R)*40)/1000 + ((campeon.AS)*20)/2.5;
+            fitnessTeamFight += ((campeon.AD + campeon.AP) * 30)/800 + ((campeon.AR + campeon.MR)*30)/600 + ((campeon.HP)*30)/6000 + ((campeon.AS)*10)/2.5;
+        }
     }
 
     // Sobrescribir el método toString
@@ -140,5 +141,14 @@ public class Individuo {
             resultado.append(campeon).append("\n");
         }
         return resultado.toString();
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        Individuo individuo = (Individuo)super.clone();
+        for(int i = 0; i < individuo.campeones.length; i++){
+            individuo.campeones[i] = this.campeones[i];
+        }
+        return individuo;
     }
 }
