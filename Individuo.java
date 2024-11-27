@@ -22,106 +22,107 @@ public class Individuo implements Cloneable{
         Random rn = new Random();
 
         // Asignar valores aleatorios a los genes del individuo
-        campeones[0] = championPool.get(rn.nextInt(20 - 1 + 1) + 1);    // Rango 1-20
-        campeones[1] = championPool.get(rn.nextInt(40 - 21 + 1) + 21);  // Rango 21-40
-        campeones[2] = championPool.get(rn.nextInt(55 - 41 + 1) + 41);  // Rango 41-55
-        campeones[3] = championPool.get(rn.nextInt(75 - 56 + 1) + 56);  // Rango 56-75
-        campeones[4] = championPool.get(rn.nextInt(90 - 76 + 1) + 76);  // Rango 76-90
+        campeones[0] = championPool.get(rn.nextInt(16 - 1 + 1) + 1);    // Rango 1-16
+        campeones[1] = championPool.get(rn.nextInt(36 - 17 + 1) + 17);  // Rango 17-36
+        campeones[2] = championPool.get(rn.nextInt(56 - 37 + 1) + 37);  // Rango 37-56
+        campeones[3] = championPool.get(rn.nextInt(70 - 57 + 1) + 57);  // Rango 57-70
+        campeones[4] = championPool.get(rn.nextInt(87 - 71 + 1) + 71);  // Rango 71-87
         calcFitness();
     }
 
     public Map<Integer, Campeon> crearChampionPool(){
         Map<Integer, Campeon> pool = new HashMap<>();
-        pool.put(1, new Campeon(1, 50, 30, 300, 20, 1, 3, 2, 3, 4, 5)); //Jax
-        pool.put(2, new Campeon(2, 60, 20, 320, 25, 2, 5, 4, 4, 4, 4)); //Gnar
-        pool.put(3, new Campeon(3, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); //
-        pool.put(4, new Campeon(4, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 4
-        pool.put(5, new Campeon(5, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 5
-        pool.put(6, new Campeon(6, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 6
-        pool.put(7, new Campeon(7, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 7
-        pool.put(8, new Campeon(8, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 8
-        pool.put(9, new Campeon(9, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 9
-        pool.put(10, new Campeon(10, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 10
-        pool.put(11, new Campeon(11, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 11
-        pool.put(12, new Campeon(12, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 12
-        pool.put(13, new Campeon(13, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 13
-        pool.put(14, new Campeon(14, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 14
-        pool.put(15, new Campeon(15, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 15
-        pool.put(16, new Campeon(16, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 16
-        pool.put(17, new Campeon(17, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 17
-        pool.put(18, new Campeon(18, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 18
-        pool.put(19, new Campeon(19, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 19
-        pool.put(20, new Campeon(20, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 20
-        pool.put(21, new Campeon(21, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 21
-        pool.put(22, new Campeon(22, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 22
-        pool.put(23, new Campeon(23, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 23
-        pool.put(24, new Campeon(24, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 24
-        pool.put(25, new Campeon(25, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 25
-        pool.put(26, new Campeon(26, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 26
-        pool.put(27, new Campeon(27, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 27
-        pool.put(28, new Campeon(28, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 28
-        pool.put(29, new Campeon(29, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 29
-        pool.put(30, new Campeon(30, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 30
-        pool.put(31, new Campeon(31, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 31
-        pool.put(32, new Campeon(32, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 32
-        pool.put(33, new Campeon(33, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 33
-        pool.put(34, new Campeon(34, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 34
-        pool.put(35, new Campeon(35, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 35
-        pool.put(36, new Campeon(36, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 36
-        pool.put(37, new Campeon(37, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 37
-        pool.put(38, new Campeon(38, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 38
-        pool.put(39, new Campeon(39, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 39
-        pool.put(40, new Campeon(40, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 40
-        pool.put(41, new Campeon(41, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 41
-        pool.put(42, new Campeon(42, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 42
-        pool.put(43, new Campeon(43, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 43
-        pool.put(44, new Campeon(44, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 44
-        pool.put(45, new Campeon(45, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 45
-        pool.put(46, new Campeon(46, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 46
-        pool.put(47, new Campeon(47, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 47
-        pool.put(48, new Campeon(48, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 48
-        pool.put(49, new Campeon(49, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 49
-        pool.put(50, new Campeon(50, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 50
-        pool.put(51, new Campeon(51, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 51
-        pool.put(52, new Campeon(52, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 52
-        pool.put(53, new Campeon(53, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 53
-        pool.put(54, new Campeon(54, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 54
-        pool.put(55, new Campeon(55, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 55
-        pool.put(56, new Campeon(56, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 56
-        pool.put(57, new Campeon(57, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 57
-        pool.put(58, new Campeon(58, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 58
-        pool.put(59, new Campeon(59, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 59
-        pool.put(60, new Campeon(60, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 60
-        pool.put(61, new Campeon(61, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 61
-        pool.put(62, new Campeon(62, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 62
-        pool.put(63, new Campeon(63, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 63
-        pool.put(64, new Campeon(64, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 64
-        pool.put(65, new Campeon(65, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 65
-        pool.put(66, new Campeon(66, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 66
-        pool.put(67, new Campeon(67, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 67
-        pool.put(68, new Campeon(68, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 68
-        pool.put(69, new Campeon(69, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 69
-        pool.put(70, new Campeon(70, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 70
-        pool.put(71, new Campeon(71, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 71
-        pool.put(72, new Campeon(72, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 72
-        pool.put(73, new Campeon(73, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 73
-        pool.put(74, new Campeon(74, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 74
-        pool.put(75, new Campeon(75, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 75
-        pool.put(76, new Campeon(76, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 76
-        pool.put(77, new Campeon(77, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 77
-        pool.put(78, new Campeon(78, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 78
-        pool.put(79, new Campeon(79, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 79
-        pool.put(80, new Campeon(80, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 80
-        pool.put(81, new Campeon(81, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 81
-        pool.put(82, new Campeon(82, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 82
-        pool.put(83, new Campeon(83, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 83
-        pool.put(84, new Campeon(84, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 84
-        pool.put(85, new Campeon(85, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 85
-        pool.put(86, new Campeon(86, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 86
-        pool.put(87, new Campeon(87, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 87
-        pool.put(88, new Campeon(88, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 88
-        pool.put(89, new Campeon(89, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 89
-        pool.put(90, new Campeon(90, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4)); // Línea 90 
+        pool.put(1, new Campeon(1, 250, 100, 350, 300, 2, 250, 250, 4000, 2, 1, "Jax")); //Jax, Counter: Poppy,
+        pool.put(2, new Campeon(2, 250, 0, 300, 1000, 1.8, 300, 280, 4000, 3, 2, "Gnar")); //Gnar, Counter: Camille, Renekton  //Gnar, Counter: Camille, Renekton 
+        pool.put(3, new Campeon(3, 80, 350, 300, 700, 1, 100, 100, 2500, 0, 2, "Rumble")); //Rumble, Counter: Sion, Renekton
+        pool.put(4, new Campeon(4, 250, 0, 280, 300, 1.6, 250, 200, 4000, 2, 2, "Renekton")); //Renekton, Counter: Jax, Darius
+        pool.put(5, new Campeon(5, 260, 0, 280, 600, 1.5, 300, 200, 4000, 3, 2, "K'sante")); //K'sante, Counter: Kennen, Rumble
+        pool.put(6, new Campeon(6, 70, 300, 280, 800, 1, 200, 200, 3400, 3, 1, "Gragas")); //Gragas, Counter: Kennen
+        pool.put(7, new Campeon(7, 260, 0, 350, 900, 2.2, 250, 200, 3500, 0, 1, "Olaf")); //Olaf, Counter: Kennen
+        pool.put(8, new Campeon(8, 250, 50, 280, 900, 1.5, 230, 230, 3700, 2, 2, "Camille")); //Camille, Counter: Kennen, Rumble
+        pool.put(9, new Campeon(9, 80, 320, 300, 800, 1, 120, 120, 2600, 2, 1, "Kennen")); //Kennen, Counter: Urgot
+        pool.put(10, new Campeon(10, 100, 50, 270, 500, 1,400, 160, 4000, 3, 4, "Sion")); // Línea 10
+        pool.put(11, new Campeon(11, 216, 0, 425, 800, 0.625, 159, 77, 2856, 2, 0, "Urgot")); // Urgot, Counter:
+        pool.put(12, new Campeon(12, 265, 0, 353, 400, 1.05, 114, 32, 3338, 2, 0, "Sett")); // Sett, Counter:
+        pool.put(13, new Campeon(13, 128, 0, 385, 700, 0.625, 322, 77, 2883, 3, 0, "Ornn")); // Ornn, Counter:
+        pool.put(14, new Campeon(14, 221, 0, 353, 550, 0.875, 119, 32, 3106, 2, 0, "Darius")); // Darius, Counter:
+        pool.put(15, new Campeon(15, 288, 0, 385, 600, 0.75, 32, 32, 1860, 2, 0, "Jayce")); // Jayce, Counter:
+        pool.put(16, new Campeon(16, 118, 0, 385, 650, 0.625, 115, 157, 2766, 3, 0, "Sejuani")); // Sejuani, Counter:
+
+        pool.put(17, new Campeon(17, 204, 0, 385, 250, 0.75, 42, 57, 3066, 3, 0, "Vi")); // Vi, Counter:
+        pool.put(18, new Campeon(18, 246, 0, 385, 1000, 1.04, 38, 52, 3300, 2, 0, "Nocturne")); // Nocturne, Counter:
+        pool.put(19, new Campeon(19, 124, 0, 385, 600, 0.625, 135, 82, 3340, 3, 0, "Maokai")); // Maokai, Counter:
+        pool.put(20, new Campeon(20, 222, 0, 385, 175, 0.668, 63, 32, 2816, 2, 0, "Xin Zhao")); // Xin Zhao, Counter:
+        pool.put(21, new Campeon(21, 198, 0, 385, 325, 0.8125, 63, 32, 3199, 2, 0, "Wukong")); // Wukong, Counter:
+        pool.put(22, new Campeon(22, 113, 70, 385, 550, 0.625, 53, 32, 2406, 2, 0, "Ivern")); // Ivern, Counter:
+        pool.put(23, new Campeon(23, 62, 400, 400, 1500, 0.668, 81, 30, 2050, 2, 0, "Nidalee")); // Nidalee, Counter:
+        pool.put(24, new Campeon(24, 53, 185, 385, 800, 0.625, 38, 32, 2810, 3, 0, "Zyra")); // Zyra, Counter:
+        pool.put(25, new Campeon(25, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Brand")); // Línea 25
+        pool.put(26, new Campeon(26, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Kindred")); // Línea 26
+        pool.put(27, new Campeon(27, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Amumu")); // Línea 27
+        pool.put(28, new Campeon(28, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Jarvan IV")); // Línea 28
+        pool.put(29, new Campeon(29, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Nunu")); // Línea 29
+        pool.put(30, new Campeon(30, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Lee Sin")); // Línea 30
+        pool.put(31, new Campeon(31, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Morgana")); // Línea 31
+        pool.put(32, new Campeon(32, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Lillia")); // Línea 32
+        pool.put(33, new Campeon(33, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Viego")); // Línea 33
+        pool.put(34, new Campeon(34, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Fiddlesticks")); // Línea 34
+        pool.put(35, new Campeon(35, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Elise")); // Línea 35
+        pool.put(36, new Campeon(36, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Skarner")); // Línea 36
+
+        pool.put(37, new Campeon(37, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Ahri")); // Línea 37
+        pool.put(38, new Campeon(38, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Sylas")); // Línea 38
+        pool.put(39, new Campeon(39, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Orianna")); // Línea 39
+        pool.put(40, new Campeon(40, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Smolder")); // Línea 40
+        pool.put(41, new Campeon(41, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Aurora")); // Línea 41
+        pool.put(42, new Campeon(42, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Akali")); // Línea 42
+        pool.put(43, new Campeon(43, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Tristana")); // Línea 43
+        pool.put(44, new Campeon(44, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Syndra")); // Línea 44
+        pool.put(45, new Campeon(45, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Galio")); // Línea 45
+        pool.put(46, new Campeon(46, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Neeko")); // Línea 46
+        pool.put(47, new Campeon(47, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Lucian")); // Línea 47
+        pool.put(48, new Campeon(48, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "LeeBlanc")); // Línea 48
+        pool.put(49, new Campeon(49, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Cassiopeia")); // Línea 49
+        pool.put(50, new Campeon(50, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Yasuo")); // Línea 50
+        pool.put(51, new Campeon(51, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Hwei")); // Línea 51
+        pool.put(52, new Campeon(52, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Yone")); // Línea 52
+        pool.put(53, new Campeon(53, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Swain")); // Línea 53
+        pool.put(54, new Campeon(54, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Ryze")); // Línea 54
+        pool.put(55, new Campeon(55, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Seraphine")); // Línea 55
+        pool.put(56, new Campeon(56, 70, 25, 280, 30, 3, 4, 4, 4, 4, 4, "Kassadin")); // Línea 56
+
+        pool.put(57, new Campeon(57, 200, 150, 380, 900, 2, 70, 70, 2000, 0, 4, "Kai'Sa")); // Línea 57
+        pool.put(58, new Campeon(58, 200, 100, 380, 1200, 2, 70, 70, 3000, 0, 4, "Ezreal")); // Línea 58
+        pool.put(59, new Campeon(59, 200, 50, 380, 900, 2, 70, 70, 2000, 2, 4, "Ashe")); // Línea 59
+        pool.put(60, new Campeon(60, 250, 0, 380, 900, 2.5, 70, 70, 2500, 0, 4, "Kalista")); // Línea 60
+        pool.put(61, new Campeon(61, 300, 0, 410,1000, 1.5,  70, 70, 2000, 0, 4, "Jhin")); // Línea 61
+        pool.put(62, new Campeon(62, 200, 50, 380, 900, 2, 100, 100, 3000, 1, 4, "Xayah")); // Línea 62
+        pool.put(63, new Campeon(63, 250, 50, 380, 900, 2, 70, 70, 2000, 1, 4, "Miss Fortune")); // Línea 63
+        pool.put(64, new Campeon(64, 70, 400, 350, 1100, 1, 70, 70, 2000, 1, 4, "Ziggs")); // Línea 64
+        pool.put(65, new Campeon(65, 200, 50, 370, 1000, 2, 70, 70, 2000, 1, 4, "Varus")); // Línea 65
+        pool.put(66, new Campeon(66, 250, 50, 350, 1200, 2, 70, 70, 2000, 2, 4, "Caitlyn")); // Línea 66
+        pool.put(67, new Campeon(67, 250, 50, 400, 1100, 2.5, 70, 70, 2000, 1, 4, "Jinx")); // Línea 67
+        pool.put(68, new Campeon(68, 300, 0, 380, 900, 2, 70, 70, 2000, 1, 4, "Draven")); // Línea 68
+        pool.put(69, new Campeon(69, 200, 150, 450, 900, 2, 70, 70, 2500, 0, 4, "Zeri")); // Línea 69
+        pool.put(70, new Campeon(70, 250, 400, 400, 1100, 2.5, 70, 70, 2000, 0, 4, "Twitch")); // Línea 70
+        
+        pool.put(71, new Campeon(71, 70, 25, 380, 650, .8, 150, 150, 2500, 3, 4, "Rell")); // Línea 71
+        pool.put(72, new Campeon(72, 70, 25, 420, 700, .8, 150, 150, 2000, 2, 4, "Rakan")); // Línea 72
+        pool.put(73, new Campeon(73, 70, 25, 400, 700, .8, 150, 150, 2500, 3, 4, "Leona")); // Línea 73
+        pool.put(74, new Campeon(74, 70, 100, 350, 700, .8, 70, 70, 3000, 2, 4, "Renata Glasc")); // Línea 74
+        pool.put(75, new Campeon(75, 70, 25, 380, 700, .8, 150, 150, 2500, 3, 4, "Alistar")); // Línea 75
+        pool.put(76, new Campeon(76, 70, 25, 380, 600, .8, 150, 150, 2500, 3, 4, "Braum")); // Línea 76
+        pool.put(77, new Campeon(77, 70, 25, 380, 400, 1.2, 150, 150, 2500, 4, 4, "Poppy")); // Línea 77
+        pool.put(78, new Campeon(78, 70, 26, 380, 700, .8, 150, 150, 2500, 4, 4, "Nautilus")); // Línea 78
+        pool.put(79, new Campeon(79, 200, 0, 450, 1000, 1.3, 70, 70, 2000, 2, 4, "Pyke")); // Línea 79
+        pool.put(80, new Campeon(80, 70, 200, 380, 900, .8, 70, 70, 2500, 2, 4, "Nami")); // Línea 80
+        pool.put(81, new Campeon(81, 70, 350, 360, 1100, .8, 70, 70, 2000, 2, 4, "Lux")); // Línea 81
+        pool.put(82, new Campeon(82, 70, 21, 380, 700, .8, 150, 150, 2500, 4, 4, "Taric")); // Línea 82
+        pool.put(83, new Campeon(83, 70, 200, 350, 1000, 1, 70, 70, 2000, 2, 4, "Lulu")); // Línea 83
+        pool.put(84, new Campeon(84, 70, 26, 380, 700, .8, 150, 150, 2500, 3, 4, "Tahm Kench")); // Línea 84
+        pool.put(85, new Campeon(85, 200, 0, 360, 1100, 1.5, 70, 70, 2000, 1, 4, "Senna")); // Línea 85
+        pool.put(86, new Campeon(86, 70, 200, 380, 1000, 1.5, 70, 70, 2000, 2, 4, "Bardo")); // Línea 86
+        pool.put(87, new Campeon(87, 70, 26, 380, 700, .8, 150, 150, 2500, 3, 4, "Blitzcrank")); // Línea 87
         return pool;
     }
 
@@ -136,7 +137,7 @@ public class Individuo implements Cloneable{
     // Sobrescribir el método toString
     @Override
     public String toString() {
-        StringBuilder resultado = new StringBuilder("Individuo:\n");
+        StringBuilder resultado = new StringBuilder("\n");
         for (Campeon campeon : campeones) {
             resultado.append(campeon).append("\n");
         }

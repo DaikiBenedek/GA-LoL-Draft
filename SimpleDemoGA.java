@@ -11,7 +11,6 @@ public class SimpleDemoGA {
         Random rn = new Random();
         //Generar composición inicial
         Individuo oponente = new Individuo();
-        System.out.println("Oponente " + oponente);
         //Initialize population
         Generacion generacion = new Generacion();
         Individuo mejor;
@@ -22,23 +21,27 @@ public class SimpleDemoGA {
         generacion.initializePopulation(100);
         mejor = generacion.getFittest(oponente);
         peor = generacion.getLeastFittest(oponente);
-        System.out.println("Mejor " + mejor);
-        System.out.println("Peor " + peor);
 
+        //Individuo[] test = generacion.seleccionarPadres();
+        //for (int i = 0; i < 2; i++) {
+        //    System.out.println(test[i]);
+        //}
+        //Imprimir el oponente
+        System.out.println("Oponente " + oponente + "Poke: " + oponente.fitnessPoke + " Engage: " + oponente.fitnessEngage + " Team Fight: " + oponente.fitnessTeamFight + "\n");
         // Simulación de generaciones
-        for (int generacionActual = 0; generacionActual < 10; generacionActual++) {
+        for (int generacionActual = 0; generacionActual < 50; generacionActual++) {
             // Seleccionar padres
-            Individuo[] padres = new Individuo[10]; // Selecciona 10 padres aleatoriamente
-            for (int i = 0; i < padres.length; i++) {
-                padres[i] = generacion.individuos[new Random().nextInt(generacion.popSize)];
-            }
+            //Individuo[] padres = new Individuo[100]; // Selecciona 100 padres aleatoriamente
+            //for (int i = 0; i < padres.length; i++) {
+            //    padres[i] = generacion.individuos[new Random().nextInt(generacion.popSize)];
+            //}
 
             // Crear hijos mediante cruza
-            Individuo[] hijos = new Individuo[10];
-            for (int i = 0; i < hijos.length; i++) {
-                Individuo padre1 = padres[new Random().nextInt(padres.length)];
-                Individuo padre2 = padres[new Random().nextInt(padres.length)];
-                hijos[i] = generacion.cruzar(padre1, padre2);
+            Individuo[] hijos = new Individuo[100];
+            Individuo[] padres = new Individuo[2];
+            for (int i = 0; i < hijos.length; i++){
+                padres = generacion.seleccionarPadres();
+                hijos[i] = generacion.cruzar(padres);
             }
 
             // Aplicar mutación a los hijos
@@ -46,13 +49,21 @@ public class SimpleDemoGA {
                 generacion.mutacion(hijo);
             }
 
-            // Reemplazar población usando (μ + λ)
+            //Reemplazar población usando (μ + λ)
             generacion.reemplazoSeleccion(hijos);
 
+            System.out.println("Generacion: " + generacionActual);
+            System.out.println("Peor: " + peor);
+            System.out.println("Poke: " + peor.fitnessPoke + "\nEngage: " + peor.fitnessEngage + "\nTeam Fight:" + peor.fitnessTeamFight);
+            System.out.println("Total: " + peor.fitnessTotal);
+            System.out.println("\nMejor: " + mejor);
+            System.out.println("Poke: " + mejor.fitnessPoke + "\nEngage: " + mejor.fitnessEngage + "\nTeam Fight:" + mejor.fitnessTeamFight);
+            System.out.println("Total: " + mejor.fitnessTotal);
             // Imprimir mejor fitness de la generación
-            System.out.println("Generación " + generacionActual + " - Mejor fitness: " + generacion.individuos[0].fitnessTotal);
+            //System.out.println("Generación " + generacionActual + " - Mejor fitness: " + generacion.individuos[0].fitnessTotal);
         }
     }
+}
 
     //Selection
     //void selection() {
@@ -63,7 +74,6 @@ public class SimpleDemoGA {
         //Select the second most fittest individual
         //secondFittest = population.getSecondFittest();
     //}
-}
 
         /**
          * 

@@ -11,7 +11,7 @@ public class Generacion {
     public void initializePopulation(int size) {
         for (int i = 0; i < individuos.length; i++) {
             individuos[i] = new Individuo();
-            //System.out.println(individuos[i]);
+            //System.out.println(individuos[i] + "Individuo "+i);
         }
     }
 
@@ -51,6 +51,7 @@ public class Generacion {
             }
         }
         worst = minFitIndex;
+        //System.out.println("Poke: " + individuos[minFitIndex].fitnessPoke + "\nEngage: " + individuos[minFitIndex].fitnessEngage + "\nTeam Fight:" + individuos[minFitIndex].fitnessTeamFight);
         try {
             return (Individuo) individuos[minFitIndex].clone();
         } catch (CloneNotSupportedException e) {
@@ -63,10 +64,11 @@ public class Generacion {
         Random random = new Random();
         Individuo[] padres = new Individuo[2];
         padres[0] = individuos[random.nextInt(popSize)];
+        Arrays.asList(individuos).indexOf(padres[0]);
         padres[1] = individuos[random.nextInt(popSize)];
+        Arrays.asList(individuos).indexOf(padres[1]);
         return padres;
     }
-
     // Operador de cruza uniforme
     public Individuo cruzar(Individuo[] padres) {
         Random random = new Random();
@@ -86,12 +88,11 @@ public class Generacion {
     }
 
     //Mutacion
-
     public void mutacion(Individuo individuo){
         Random random = new Random();
-        if (random.nextDouble() < 0.1) { // 10% de probabilidad
+        if (random.nextDouble() < .1) { // 10% de probabilidad
             int index = random.nextInt(individuo.campeones.length); // Índice del campeón a mutar
-            int nuevoId = random.nextInt(90 - 1 + 1) + 1; // ID aleatorio del nuevo campeón
+            int nuevoId = random.nextInt(87 - 1 + 1) + 1; // ID aleatorio del nuevo campeón
             Campeon nuevoCampeon = individuo.championPool.get(nuevoId); // Selecciona un campeón aleatorio
             individuo.campeones[index] = nuevoCampeon; // Reemplaza el campeón
             individuo.calcFitness(); // Recalcula el fitness
@@ -100,15 +101,12 @@ public class Generacion {
 
     public void reemplazoSeleccion(Individuo[] hijos) {
         // Combina padres e hijos en una sola población
-        Individuo[] nuevaPoblacion = new Individuo[individuos.length + hijos.length];
-        System.arraycopy(individuos, 0, nuevaPoblacion, 0, individuos.length);
-        System.arraycopy(hijos, 0, nuevaPoblacion, individuos.length, hijos.length);
+        //Individuo[] nuevaPoblacion = new Individuo[100];
+        //System.arraycopy(individuos, 0, nuevaPoblacion, 0, individuos.length);
+        System.arraycopy(hijos, 0, individuos, 0, hijos.length);
 
         // Ordena la población combinada por fitness (descendente)
-        Arrays.sort(nuevaPoblacion, (a, b) -> Float.compare(b.fitnessTotal, a.fitnessTotal));
-
-        // Selecciona los mejores individuos para la nueva población
-        System.arraycopy(nuevaPoblacion, 0, individuos, 0, individuos.length);
+        Arrays.sort(individuos, (a, b) -> Float.compare(b.fitnessTotal, a.fitnessTotal));
     }
   /*
     //Get the second most fittest individual
