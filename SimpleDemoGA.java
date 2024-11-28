@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
@@ -12,14 +14,20 @@ public class SimpleDemoGA {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Individuo oponenteAleatorio = new Individuo();
+        System.out.println("¿Cuántos individuos quieres?: ");
+        int numIndividuos = scanner.nextInt();
+        System.out.println("\n¿Cuántas generaciones quieres?: ");
+        int numGeneraciones = scanner.nextInt();
+        System.out.println("\n¿Cuántas iteraciones quieres?: ");
+        int numIteraciones = scanner.nextInt();
         System.out.println("Escribe 0 para composición aleatoria \nEscribe 1 para ingresarla manualmente\n");
         switch(scanner.nextInt()){
             case(0):
-            compoAleatoria(oponenteAleatorio);
+            compoAleatoria(oponenteAleatorio, numIndividuos, numGeneraciones, numIteraciones);
             break;
             case(1):
             Individuo oponente = compoEscrita(oponenteAleatorio);
-            compoAleatoria(oponente);
+            compoAleatoria(oponente, numIndividuos, numGeneraciones, numIteraciones);
             break;
             default:
             System.out.println("Opcion invalida");
@@ -55,7 +63,7 @@ public class SimpleDemoGA {
         return null; // No encontrado
     }
 
-    public static void compoAleatoria(Individuo oponente){
+    public static void compoAleatoria(Individuo oponente, int numIndividuos, int numGeneraciones, int numIteraciones){
         Random rn = new Random();
         //Generar composición inicial
         //Initialize population
@@ -64,8 +72,9 @@ public class SimpleDemoGA {
         Individuo mejorAllTime;
         Individuo peor;
         Individuo peorAllTime;
+        int generacionContador = 0;
         
-        generacion.initializePopulation(100);
+        generacion.initializePopulation(numIndividuos);
         mejor = generacion.getFittest(oponente);
         peor = generacion.getLeastFittest(oponente);
         mejorAllTime = mejor;
@@ -77,7 +86,7 @@ public class SimpleDemoGA {
         //Imprimir el oponente
         System.out.println("Oponente " + oponente.aString() + "\nPoke: " + oponente.fitnessPoke + " Engage: " + oponente.fitnessEngage + " Team Fight: " + oponente.fitnessTeamFight + "\n");
         // Simulación de generaciones
-        for (int generacionActual = 0; generacionActual < 10; generacionActual++) {
+        for (int generacionActual = 0; generacionActual < numGeneraciones; generacionActual++) {
             // Seleccionar padres
             //Individuo[] padres = new Individuo[100]; // Selecciona 100 padres aleatoriamente
             //for (int i = 0; i < padres.length; i++) {
@@ -85,6 +94,7 @@ public class SimpleDemoGA {
             //}
 
             // Crear hijos mediante cruza
+            generacionContador++;
             Individuo[] hijos = new Individuo[10];
             Individuo[] padres = new Individuo[2];
             for (int i = 0; i < hijos.length; i++){
@@ -103,7 +113,7 @@ public class SimpleDemoGA {
             generacion.reemplazoSeleccion(hijos, oponente);
             System.out.println(hijos);
             System.out.println("-------------------------------------------");
-            System.out.println("Generacion: " + generacionActual);
+            System.out.println("Generacion: " + generacionContador);
             System.out.println("-------------------------------------------");
             System.out.println("Peor: " + peor.aString());
             System.out.println("Poke: " + peor.fitnessPoke + " Engage: " + peor.fitnessEngage + " Team Fight: " + peor.fitnessTeamFight);
@@ -126,139 +136,28 @@ public class SimpleDemoGA {
             System.out.println("Oponente " + oponente.aString() + "\nPoke: " + oponente.fitnessPoke + " Engage: " + oponente.fitnessEngage + " Team Fight: " + oponente.fitnessTeamFight + "\n");
             // Imprimir mejor fitness de la generación
             //System.out.println("Generación " + generacionActual + " - Mejor fitness: " + generacion.individuos[0].fitnessTotal);
+            guardarDatosGeneracion(generacionContador, mejor, peor, generacion.individuos);
         }
+    }
+    public static void guardarDatosGeneracion(int generacion, Individuo mejor, Individuo peor, Individuo[] poblacion) {
+        String archCSV = "C:\\Users\\daiki\\Desktop\\ProyectoEvolutivo\\GA-LoL-Draft\\resultados.csv";
+        try (FileWriter writer = new FileWriter(archCSV, true)) {
+            // Guardar estadísticas generales
+            writer.write(String.format("%d,%f,%f,%f\n", generacion, mejor.fitnessTotal, peor.fitnessTotal, calcularPromedio(poblacion)));
+            // Guardar fitness de todos los individuos (opcional, para boxplot)
+            //for (Individuo individuo : poblacion) {
+            //    writer.write(String.format("%d,%f\n", generacion, individuo.fitnessTotal));
+            //}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private static float calcularPromedio(Individuo[] poblacion) {
+        float suma = 0;
+        for (Individuo individuo : poblacion) {
+            suma += individuo.fitnessTotal;
+        }
+        return suma / poblacion.length;
     }
 }
-
-    //Selection
-    //void selection() {
-
-        //Select the most fittest individual
-        //fittest = population.getFittest();
-
-        //Select the second most fittest individual
-        //secondFittest = population.getSecondFittest();
-    //}
-
-        /**
-         * 
-         
-        Random rn = new Random();
-
-        SimpleDemoGA demo = new SimpleDemoGA();
-
-        //Initialize population
-        demo.population.initializePopulation(10);
-
-        //Calculate fitness of each individual
-        demo.population.calculateFitness();
-
-        System.out.println("Generation: " + demo.generationCount + " Fittest: " + demo.population.fittest);
-
-        //While population gets an individual with maximum fitness
-        while (demo.population.fittest < 5) {
-            ++demo.generationCount;
-
-            //Do selection
-            demo.selection();
-
-            //Do crossover
-            demo.crossover();
-
-            //Do mutation under a random probability
-            if (rn.nextInt()%7 < 5) {
-                demo.mutation();
-            }
-
-            //Add fittest offspring to population
-            demo.addFittestOffspring();
-
-            //Calculate new fitness value
-            demo.population.calculateFitness();
-
-            System.out.println("Generation: " + demo.generationCount + " Fittest: " + demo.population.fittest);
-        }
-
-        System.out.println("\nSolution found in generation " + demo.generationCount);
-        System.out.println("Fitness: "+demo.population.getFittest().fitness);
-        System.out.print("Genes: ");
-        for (int i = 0; i < 5; i++) {
-            System.out.print(demo.population.getFittest().genes[i]);
-        }
-
-        System.out.println("");
-
-    }
-
-    //Selection
-    void selection() {
-
-        //Select the most fittest individual
-        fittest = population.getFittest();
-
-        //Select the second most fittest individual
-        secondFittest = population.getSecondFittest();
-    }
-
-    //Crossover
-    void crossover() {
-        Random rn = new Random();
-
-        //Select a random crossover point
-        int crossOverPoint = rn.nextInt(population.individuals[0].geneLength);
-
-        //Swap values among parents
-        for (int i = 0; i < crossOverPoint; i++) {
-            int temp = fittest.genes[i];
-            fittest.genes[i] = secondFittest.genes[i];
-            secondFittest.genes[i] = temp;
-
-        }
-
-    }
-
-    //Mutation
-    void mutation() {
-        Random rn = new Random();
-
-        //Select a random mutation point
-        int mutationPoint = rn.nextInt(population.individuals[0].geneLength);
-
-        //Flip values at the mutation point
-        if (fittest.genes[mutationPoint] == 0) {
-            fittest.genes[mutationPoint] = 1;
-        } else {
-            fittest.genes[mutationPoint] = 0;
-        }
-
-        mutationPoint = rn.nextInt(population.individuals[0].geneLength);
-
-        if (secondFittest.genes[mutationPoint] == 0) {
-            secondFittest.genes[mutationPoint] = 1;
-        } else {
-            secondFittest.genes[mutationPoint] = 0;
-        }
-    }
-
-    //Get fittest offspring
-    Individual getFittestOffspring() {
-        if (fittest.fitness > secondFittest.fitness) {
-            return fittest;
-        }
-        return secondFittest;
-    }
-
-
-    //Replace least fittest individual from most fittest offspring
-    void addFittestOffspring() {
-
-        //Update fitness values of offspring
-        fittest.calcFitness();
-        secondFittest.calcFitness();
-
-        //Get index of least fit individual
-        int leastFittestIndex = population.getLeastFittestIndex();
-
-        //Replace least fittest individual from most fittest offspring
-        population.individuals[leastFittestIndex] = getFittestOffspring();
-    }*/

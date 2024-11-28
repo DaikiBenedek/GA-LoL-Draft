@@ -2,13 +2,14 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Generacion {
-    int popSize = 100;
-    Individuo[] individuos = new Individuo[10];
+    int popSize = 0;
+    Individuo[] individuos = new Individuo[1];
     int fittest = 0;
     int worst = 0;
 
     //Initialize population
     public void initializePopulation(int size) {
+        popSize = size;
         individuos = new Individuo[size];
         for (int i = 0; i < individuos.length; i++) {
             individuos[i] = new Individuo();
@@ -139,19 +140,4 @@ public class Generacion {
             System.out.println("Total: " + individuos[i].fitnessTotal);
         }
     }
-  /*
-    //Get the second most fittest individual
-    public Individual getSecondFittest() {
-        int maxFit1 = 0;
-        int maxFit2 = 0;
-        for (int i = 0; i < individuals.length; i++) {
-            if (individuals[i].fitness > individuals[maxFit1].fitness) {
-                maxFit2 = maxFit1;
-                maxFit1 = i;
-            } else if (individuals[i].fitness > individuals[maxFit2].fitness) {
-                maxFit2 = i;
-            }
-        }
-        return individuals[maxFit2];
-    }*/ 
 }
