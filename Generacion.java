@@ -3,15 +3,22 @@ import java.util.Random;
 
 public class Generacion {
     int popSize = 100;
-    Individuo[] individuos = new Individuo[100];
+    Individuo[] individuos = new Individuo[10];
     int fittest = 0;
     int worst = 0;
 
     //Initialize population
     public void initializePopulation(int size) {
+        individuos = new Individuo[size];
         for (int i = 0; i < individuos.length; i++) {
             individuos[i] = new Individuo();
             //System.out.println(individuos[i] + "Individuo "+i);
+        }
+    }
+
+    public void calcFitnessTotal(Individuo[] nuevaPoblacion, Individuo oponente){
+        for (int i = 0; i < nuevaPoblacion.length; i++){
+            nuevaPoblacion[i].fitnessTotal = (nuevaPoblacion[i].fitnessEngage - oponente.fitnessPoke) + (nuevaPoblacion[i].fitnessPoke - oponente.fitnessTeamFight) + (nuevaPoblacion[i].fitnessTeamFight - oponente.fitnessEngage);
         }
     }
 
@@ -99,14 +106,38 @@ public class Generacion {
         }
     }
 
-    public void reemplazoSeleccion(Individuo[] hijos) {
-        // Combina padres e hijos en una sola población
-        //Individuo[] nuevaPoblacion = new Individuo[100];
-        //System.arraycopy(individuos, 0, nuevaPoblacion, 0, individuos.length);
-        System.arraycopy(hijos, 0, individuos, 0, hijos.length);
+    public void reemplazoSeleccion(Individuo[] hijos, Individuo oponente) {
+        //Combina padres e hijos en una sola población
+        Individuo[] nuevaPoblacion = new Individuo[individuos.length + hijos.length];
+        System.arraycopy(individuos, 0, nuevaPoblacion, 0, individuos.length);
+        System.arraycopy(hijos, 0, nuevaPoblacion, individuos.length, hijos.length);
+        System.out.println("Nueva poblacion");
+        for(int i = 0; i < nuevaPoblacion.length; i++){
+            nuevaPoblacion[i].calcFitness();
+            System.out.println("\nNumero " + i + " " + nuevaPoblacion[i].aString());
+            System.out.println("Poke: " + nuevaPoblacion[i].fitnessPoke + " Engage: " + nuevaPoblacion[i].fitnessEngage + " Team Fight: " + nuevaPoblacion[i].fitnessTeamFight);
+            calcFitnessTotal(nuevaPoblacion, oponente);
+            System.out.println("Total: " + nuevaPoblacion[i].fitnessTotal);
+        }
 
         // Ordena la población combinada por fitness (descendente)
-        Arrays.sort(individuos, (a, b) -> Float.compare(b.fitnessTotal, a.fitnessTotal));
+        Arrays.sort(nuevaPoblacion, (i1, i2) -> Float.compare(i2.fitnessTotal, i1.fitnessTotal));
+        System.out.println("Poblacion ordenada");
+        for(int i = 0;i<nuevaPoblacion.length;i++){
+            System.out.println("\nNumero " + i + " " + nuevaPoblacion[i].aString());
+            nuevaPoblacion[i].aString();
+            System.out.println("Poke: " + nuevaPoblacion[i].fitnessPoke + " Engage: " + nuevaPoblacion[i].fitnessEngage + " Team Fight: " + nuevaPoblacion[i].fitnessTeamFight);
+            System.out.println("Total: " + nuevaPoblacion[i].fitnessTotal);
+        }
+        // Selecciona los mejores individuos para la nueva población
+        System.arraycopy(nuevaPoblacion, 0, individuos, 0, individuos.length);
+        System.out.println("Poblacion SIGUIENTE");
+        for(int i = 0;i<individuos.length;i++){
+            System.out.println("\nNumero " + i + " " + individuos[i].aString());
+            individuos[i].aString();
+            System.out.println("Poke: " + individuos[i].fitnessPoke + " Engage: " + individuos[i].fitnessEngage + " Team Fight: " + individuos[i].fitnessTeamFight);
+            System.out.println("Total: " + individuos[i].fitnessTotal);
+        }
     }
   /*
     //Get the second most fittest individual
