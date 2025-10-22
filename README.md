@@ -4,6 +4,11 @@
 This program is an implementation of a **Genetic Algorithm** applied to team selection in *League of Legends*.  
 It allows the user to explore evolutionary optimization by configuring key parameters of the simulation.
 
+### Additional Materials
+
+This repository also includes a **PDF document** containing the full investigation article.  
+It describes the theoretical background, methodology, and detailed results of the project for a comprehensive understanding of the approach and findings.
+
 ### How it works
 
 1. When you run the program, it asks you to provide:
